@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WeatherPro</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Chart.js CDN -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+      defer
+    ></script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <span class="logo">⛅</span>
+          <span class="title">WeatherPro</span>
+        </div>
+
+        <div class="controls">
+          <div class="search">
+            <input
+              id="searchInput"
+              list="cityHints"
+              type="text"
+              placeholder="Search city (e.g., London)"
+            />
+            <datalist id="cityHints">
+              <option>London</option>
+              <option>New York</option>
+              <option>Tokyo</option>
+              <option>Paris</option>
+              <option>Bengaluru</option>
+              <option>Delhi</option>
+              <option>Mumbai</option>
+              <option>Singapore</option>
+              <option>Dubai</option>
+              <option>Sydney</option>
+            </datalist>
+            <button id="searchBtn" class="btn">Search</button>
+            <button id="locBtn" class="btn ghost" title="Use my location">
+              📍
+            </button>
+          </div>
+
+          <div class="toggles">
+            <button id="unitToggle" class="chip" title="Toggle °C / °F">
+              °C
+            </button>
+            <button id="themeToggle" class="chip" title="Toggle dark mode">
+              🌙
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <main class="grid">
+        <!-- primary card -->
+        <section class="card hero" id="heroCard">
+          <div class="hero-left">
+            <div class="place">
+              <h2 id="placeName">—</h2>
+              <p id="localTime">—</p>
+            </div>
+            <div class="tempBlock">
+              <img id="conditionIcon" alt="" />
+              <div>
+                <div id="temperature" class="temp">—</div>
+                <div id="conditionText" class="muted">—</div>
+              </div>
+            </div>
+            <div class="chips">
+              <span class="chip"
+                >Feels like: <strong id="feelsLike">—</strong></span
+              >
+              <span class="chip"
+                >Humidity: <strong id="humidity">—</strong></span
+              >
+              <span class="chip">Wind: <strong id="wind">—</strong></span>
+              <span class="chip">UV: <strong id="uv">—</strong></span>
+            </div>
+            <div class="sun">
+              <span>🌅 <strong id="sunrise">—</strong></span>
+              <span>🌇 <strong id="sunset">—</strong></span>
+            </div>
+            <div class="actions">
+              <button id="saveFavBtn" class="btn">☆ Save</button>
+              <button id="removeFavBtn" class="btn ghost">★ Remove</button>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <div class="aqi-card">
+              <h3>Air Quality</h3>
+              <div id="aqiBadge" class="aqi-badge">—</div>
+              <p id="aqiNote" class="muted small">—</p>
+            </div>
+            <ul id="alerts" class="alerts"></ul>
+          </div>
+        </section>
+
+        <!-- favorites -->
+        <section class="card" id="favoritesCard">
+          <div class="section-head">
+            <h3>Favorites</h3>
+            <button id="clearFavs" class="link">Clear all</button>
+          </div>
+          <div id="favoritesList" class="favorites"></div>
+        </section>
+
+        <!-- hourly chart -->
+        <section class="card">
+          <div class="section-head">
+            <h3>Next 24 hours</h3>
+          </div>
+          <canvas id="hourlyChart" height="120"></canvas>
+        </section>
+
+        <!-- 7 day forecast -->
+        <section class="card">
+          <div class="section-head">
+            <h3>7‑Day Forecast</h3>
+          </div>
+          <div id="dailyList" class="days"></div>
+          <canvas id="dailyChart" height="120"></canvas>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Data: WeatherAPI</span>
+        <span class="muted"
+          >Built for your portfolio • Responsive • Offline fallback</span
+        >
+      </footer>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast" hidden></div>
+  </body>
+</html>
